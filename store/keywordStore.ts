@@ -4,6 +4,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface KeywordState {
   recentKeywords: Keyword[];
+  isLoading: boolean;
+  setLoading: (loading: boolean) => void;
   addKeyword: (keyword: Keyword) => void;
   removeKeyword: (keyword: string) => void;
   clearAllKeywords: () => void;
@@ -19,6 +21,10 @@ const useKeywordStore = create<KeywordState>()(
   persist(
     (set, get) => ({
       recentKeywords: [],
+      isLoading: true,
+      setLoading: (loading: boolean) => {
+        set((state) => ({ ...state, isLoading: loading }));
+      },
       addKeyword: (keyword: Keyword) => {
         const { recentKeywords } = get();
 
@@ -40,6 +46,11 @@ const useKeywordStore = create<KeywordState>()(
     {
       name: "keyword-storage",
       storage: createJSONStorage(() => AsyncStorage),
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          state.setLoading(false);
+        }
+      },
     }
   )
 );
