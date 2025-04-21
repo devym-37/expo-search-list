@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { Text, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import useKeywordStore, { Keyword } from "@/store/keywordStore";
 import AntIcons from "@expo/vector-icons/AntDesign";
 import { getHitSlop } from "@/utils/base";
+import { useRouter } from "expo-router";
 
 interface Props {
   keyword: Keyword;
@@ -14,10 +15,21 @@ interface Props {
  */
 
 const RecentKeywordItem = ({ keyword }: Props) => {
+  const router = useRouter();
   const removeKeyword = useKeywordStore((state) => state.removeKeyword);
 
+  const handleClickRecentKeyword = (recentKeyword: string) => {
+    router.push({
+      pathname: "/search",
+      params: { keyword: recentKeyword },
+    });
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => handleClickRecentKeyword(keyword.value)}
+      style={styles.container}
+    >
       <Text style={styles.text}>{keyword.value}</Text>
 
       <Pressable
@@ -26,7 +38,7 @@ const RecentKeywordItem = ({ keyword }: Props) => {
       >
         <AntIcons name="closecircle" size={16} color="#858585" />
       </Pressable>
-    </View>
+    </TouchableOpacity>
   );
 };
 
