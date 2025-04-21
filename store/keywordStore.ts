@@ -11,7 +11,7 @@ interface KeywordState {
   clearAllKeywords: () => void;
 }
 
-type Keyword = {
+export type Keyword = {
   key: string;
   value: string;
   date: string;
@@ -40,6 +40,7 @@ const useKeywordStore = create<KeywordState>()(
         }));
       },
       clearAllKeywords: () => {
+        console.log("here:>>>>");
         set({ recentKeywords: [] });
       },
     }),
