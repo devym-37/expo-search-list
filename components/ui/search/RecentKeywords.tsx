@@ -14,6 +14,11 @@ import { getHitSlop } from "@/utils/base";
 import RecentKeywordItem from "./RecentKeywordItem";
 import { keywordsLimit } from "@/constants/globalDefines";
 
+/**
+ * RecentKeywords 컴포넌트
+ * 최근 검색어 목록을 표시하며, 전체 삭제 기능을 제공합니다.
+ */
+
 const RecentKeywords = () => {
   const recentKeywords = useKeywordStore((state) => state.recentKeywords);
   const removeAllKeywords = useKeywordStore((state) => state.clearAllKeywords);

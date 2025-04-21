@@ -8,6 +8,11 @@ interface Props {
   keyword: Keyword;
 }
 
+/**
+ * RecentKeywordItem 컴포넌트
+ * 개별 검색어 항목을 렌더링하며, 삭제 버튼을 제공합니다.
+ */
+
 const RecentKeywordItem = ({ keyword }: Props) => {
   const removeKeyword = useKeywordStore((state) => state.removeKeyword);
 
