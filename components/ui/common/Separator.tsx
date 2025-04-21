@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleProp, ViewProps } from "react-native";
+import { View, StyleProp, ViewStyle } from "react-native";
 
 /**
  * 구분선(Separator) 컴포넌트
@@ -30,7 +30,7 @@ import { View, StyleProp, ViewProps } from "react-native";
 interface Props {
   width?: number;
   height?: number;
-  style?: StyleProp<ViewProps>;
+  style?: StyleProp<ViewStyle>;
 }
 
 const Separator = ({ width, height, style = {} }: Props) => {
