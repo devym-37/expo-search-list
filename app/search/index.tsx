@@ -34,6 +34,12 @@ const Search = () => {
     addKeyword(newKeyword);
   };
 
+  const handleClickAutoCompleteKeyword = (keyword: string) => {
+    setSearchKeyword(keyword);
+    setKeyword(keyword);
+    addKeyword(keyword);
+  };
+
   return (
     <Screen>
       <SearchInput
@@ -44,7 +50,12 @@ const Search = () => {
         onSubmitEditing={handleSubmitEditing}
       />
 
-      <SearchResultList searchKeyword={searchKeyword} />
+      <SearchResultList
+        searchKeyword={searchKeyword}
+        keyword={keyword}
+        isShowAutoComplete={!hasKeyword}
+        onClickKeyword={handleClickAutoCompleteKeyword}
+      />
     </Screen>
   );
 };
