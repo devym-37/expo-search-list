@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import dayjs from "dayjs";
 
 interface KeywordState {
   recentKeywords: Keyword[];
   isLoading: boolean;
   setLoading: (loading: boolean) => void;
-  addKeyword: (keyword: Keyword) => void;
+  addKeyword: (keyword: string) => void;
   removeKeyword: (keyword: string) => void;
   clearAllKeywords: () => void;
 }
@@ -25,10 +26,16 @@ const useKeywordStore = create<KeywordState>()(
       setLoading: (loading: boolean) => {
         set((state) => ({ ...state, isLoading: loading }));
       },
-      addKeyword: (keyword: Keyword) => {
+      addKeyword: (keyword: string) => {
         const { recentKeywords } = get();
 
-        const newKeywords = [keyword, ...recentKeywords];
+        const addKeyword = {
+          key: `${recentKeywords.length + 1}`,
+          value: keyword,
+          date: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+        };
+
+        const newKeywords = [addKeyword, ...recentKeywords];
 
         set({ recentKeywords: newKeywords });
       },
@@ -40,7 +47,6 @@ const useKeywordStore = create<KeywordState>()(
         }));
       },
       clearAllKeywords: () => {
-        console.log("here:>>>>");
         set({ recentKeywords: [] });
       },
     }),

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import {
   View,
   Text,
@@ -27,9 +27,9 @@ const RecentKeywords = () => {
     return recentKeywords.slice(0, keywordsLimit);
   }, [recentKeywords]);
 
-  const renderItem = useCallback(({ item }: ListRenderItemInfo<Keyword>) => {
+  const renderItem = ({ item }: ListRenderItemInfo<Keyword>) => {
     return <RecentKeywordItem keyword={item} />;
-  }, []);
+  };
 
   if (isEmpty(keywords)) {
     return null;
