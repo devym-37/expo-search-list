@@ -15,12 +15,21 @@ import SearchResultItem from "./SearchResultItem";
 import SearchResultHeader from "./SearchResultHeader";
 import SearchEmptyItem from "./SearchEmptyItem";
 import Separator from "../common/Separator";
+import SearchKeywordAutoComplete from "./SearchKeywordAutoComplete";
 
 interface Props {
   searchKeyword: string;
+  keyword: string;
+  isShowAutoComplete: boolean;
+  onClickKeyword: (keyword: string) => void;
 }
 
-const SearchResultList = ({ searchKeyword }: Props) => {
+const SearchResultList = ({
+  searchKeyword,
+  keyword,
+  isShowAutoComplete,
+  onClickKeyword,
+}: Props) => {
   const router = useRouter();
 
   const {
@@ -54,7 +63,13 @@ const SearchResultList = ({ searchKeyword }: Props) => {
   };
 
   if (!isShowResultList) {
-    return null;
+    return (
+      <SearchKeywordAutoComplete
+        keyword={keyword}
+        isShowAutoComplete={isShowAutoComplete}
+        onClickKeyword={onClickKeyword}
+      />
+    );
   }
 
   return (
