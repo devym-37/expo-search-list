@@ -26,13 +26,15 @@ import { View, Text, StyleSheet } from "react-native";
  */
 
 interface Props {
-  title: string;
+  title?: string;
+  leftComponent?: React.ReactNode;
 }
 
-const NavigationHeader = ({ title }: Props) => {
+const NavigationHeader = ({ leftComponent, title }: Props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.headerTitle}>{title}</Text>
+      {leftComponent && <View>{leftComponent}</View>}
+      {title && <Text style={styles.headerTitle}>{title}</Text>}
     </View>
   );
 };
