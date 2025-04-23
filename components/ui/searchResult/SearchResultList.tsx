@@ -25,6 +25,11 @@ interface Props {
   onClickKeyword: (keyword: string) => void;
 }
 
+/**
+ * SearchResultList 컴포넌트
+ * 검색 결과를 표시하거나, 자동완성 목록을 보여줍니다.
+ */
+
 const SearchResultList = ({
   searchKeyword,
   keyword,

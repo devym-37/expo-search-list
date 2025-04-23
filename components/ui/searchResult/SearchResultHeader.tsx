@@ -9,9 +9,9 @@ interface Props {
 const SearchResultHeader = ({ totalCount }: Props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{`${formatNumberComma(
-        totalCount
-      )}개 저장소`}</Text>
+      <Text style={styles.text}>
+        {`${formatNumberComma(totalCount)}개 저장소`}
+      </Text>
     </View>
   );
 };
