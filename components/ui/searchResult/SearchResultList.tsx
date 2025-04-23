@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   ListRenderItemInfo,
@@ -16,6 +16,7 @@ import SearchResultHeader from "./SearchResultHeader";
 import SearchEmptyItem from "./SearchEmptyItem";
 import Separator from "../common/Separator";
 import SearchKeywordAutoComplete from "./SearchKeywordAutoComplete";
+import Toast from "react-native-toast-message";
 
 interface Props {
   searchKeyword: string;
@@ -43,6 +44,16 @@ const SearchResultList = ({
 
   const isShowResultList = !isEmpty(searchKeyword) && !isEmpty(keywordResults);
 
+  useEffect(() => {
+    if (isError) {
+      Toast.show({
+        type: "error",
+        text1: "목록 호출에 실패했습니다.",
+        position: "bottom",
+      });
+    }
+  }, [isError]);
+
   const handleClickSearchItem = (url: string) => {
     router.push({
       pathname: "/webview",
@@ -62,7 +73,7 @@ const SearchResultList = ({
     );
   };
 
-  if (!isShowResultList) {
+  if (!isShowResultList && !isLoading) {
     return (
       <SearchKeywordAutoComplete
         keyword={keyword}
