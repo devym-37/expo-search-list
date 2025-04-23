@@ -62,7 +62,7 @@ const SearchResultList = ({
     );
   };
 
-  if (!isShowResultList) {
+  if (!isShowResultList && !isLoading) {
     return (
       <SearchKeywordAutoComplete
         keyword={keyword}
