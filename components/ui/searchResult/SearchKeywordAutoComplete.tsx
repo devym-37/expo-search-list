@@ -17,6 +17,11 @@ interface Props {
   onClickKeyword: (keyword: string) => void;
 }
 
+/**
+ * SearchKeywordAutoComplete 컴포넌트
+ * 최근 검색어를 기반으로 자동완성 추천 목록을 표시합니다.
+ */
+
 const SearchKeywordAutoComplete = ({
   keyword,
   isShowAutoComplete,
